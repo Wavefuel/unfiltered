@@ -1,0 +1,167 @@
+# Overview
+**Unfiltered** is a real-time, map-based monitoring platform for the Indo-Pakistan conflict. It aggregates events from credible sources, classifies them by type and geography, and presents them in a simple, trusted interface — map, timeline, and feed. This MVP will be public, mobile-friendly, and built in **one week** by a 7-person team.
+
+People trying to understand the Indo-Pakistan situation are overwhelmed by noise, propaganda, and unreliable reporting. There is no centralized, structured, or unbiased way to follow events as they unfold — especially for non-expert users. **Unfiltered** fixes that.
+
+# Core Features (MVP Focus)
+
+1.  **Live Feed**
+    *   **What it does**: Displays a chronological list of conflict events.
+    *   **Why it's important**: Provides immediate awareness of new and evolving situations.
+    *   **How it works**: Updates every 30s or via WebSockets. Includes timestamp, headline, type, location, and source.
+
+2.  **Interactive Map (Mapbox)**
+    *   **What it does**: Visualizes geolocated event markers.
+    *   **Why it's important**: Allows users to understand the geographical context of events.
+    *   **How it works**: Integrates with Mapbox GL JS. Features event clustering on zoom out. Click on a marker leads to an event preview modal.
+
+3.  **Filters**
+    *   **What it does**: Enables users to filter events by type and time range.
+    *   **Why it's important**: Allows users to focus on specific events of interest.
+    *   **How it works**: Filter by event type (e.g., "strike", "protest", "alert") and time range (last hour, 6 hours, 24 hours).
+
+4.  **Source Attribution and Basic Trust Info (MVP)**
+    *   **What it does**: Includes source attribution for each event and basic trust indicators.
+    *   **Why it's important**: Helps users assess the origin of information.
+    *   **How it works**: Pulled events will show their source. Basic trust info might be a "verified source" tag if applicable based on MVP logic (e.g., from multiple known sources).
+
+# User Experience (MVP Focus)
+
+*   **Target Users**:
+    *   **Concerned Citizens**: Want quick updates, safety context. Mobile-first, low attention bandwidth.
+    *   **Analysts/Journalists**: Need credible, timestamped, geolocated data. Want to reference or cite specific events.
+
+*   **Key User Flows (MVP)**:
+    1.  **Discovering Events**: User visits homepage -> Sees latest events in feed and on map -> Filters by type/time -> Clicks for details (modal).
+
+*   **UI/UX Considerations (MVP)**:
+    *   **Layout**: Map-first experience with a secondary feed. Clean, dark-themed layout for readability.
+    *   **Map Interaction**: Smooth zooming/panning, clear event markers, clustering. Hover/click → details (not too much info at once).
+    *   **Information Hierarchy**: Prioritize clarity over density. Event cards must show: Time, Location (city, region), Source logo/text, Type (icon + label).
+    *   **Performance**: Fast load times and real-time updates are critical. Target < 1s API response time.
+    *   **Mobile-Friendliness**: Aim for a mobile-optimized layout if time permits (Nice-to-Have).
+
+# Technical Architecture (MVP - 1-Week Build)
+
+*   **System Components**:
+    *   **Frontend**: Next.js (React) application with Mapbox GL JS. Client-rendered, static build with SWR for data fetching. Simple React state or Zustand.
+        *   Pages: `/` (Home: Map + Feed), `/event/[id]` (Optional modal or full page for event details).
+    *   **Backend API**: Node.js (Express.js).
+        *   Event API: `/api/events` (fetches from Elasticsearch, supports query params: `type`, `since`, `lat/lng bounds`).
+    *   **Data Ingestion Service (Scraping Pipeline)**: Node.js services using Puppeteer. Scheduled tasks or cron job.
+        *   Pulls from: Top 3 news sites (e.g., Dawn, Times of India), 1–2 Twitter accounts via API or Nitter.
+        *   Tags each event: Title, summary, timestamp, location, type, source URL.
+    *   **Data Processing Service (Simple Heuristics for MVP)**: Basic logic within ingestion or backend.
+        *   Event type classified via keyword match.
+        *   Geolocation via place name → lat/lng (Mapbox API).
+        *   Confidence: "Verified" if from multiple known sources (MVP-level heuristic).
+    *   **Real-time Push Service**: Updates every 30s (via polling/SWR) or WebSockets if time allows.
+    *   **Database**: Elasticsearch.
+        *   Single `events` index.
+
+*   **Data Models (Elasticsearch Focus - MVP)**:
+    *   **Event Document**:
+        *   `title` (String)
+        *   `description` (String, or summary)
+        *   `event_timestamp` (Date)
+        *   `event_type` (String, e.g., "strike", "protest")
+        *   `location_geo` (GeoPoint - lat/lon)
+        *   `location_name` (String)
+        *   `source_name` (String)
+        *   `source_url` (String)
+        *   `credibility_basic` (String, e.g., "Verified", "Single Source")
+        *   `bias_basic` (String, placeholder - likely out of scope for detailed MVP analysis)
+
+*   **APIs and Integrations (MVP)**:
+    *   **Internal APIs**: `/api/events` (GET for feed/map).
+    *   **External APIs**: Mapbox GL JS & Mapbox Geocoding API, Twitter API (or Nitter).
+
+*   **Infrastructure Requirements (MVP)**:
+    *   **Hosting**: Basic scalable cloud platform (e.g., Vercel for Next.js, simple Node.js hosting).
+    *   **Database Hosting**: Managed Elasticsearch service (e.g., Bonsai Elasticsearch, Elastic Cloud free/basic tier).
+    *   **CI/CD Pipeline**: Basic GitHub Actions for deployment.
+    *   **Monitoring & Logging**: Basic platform-provided logging.
+
+# Development Roadmap (MVP - 1-Week Build)
+
+*   **MVP Goals**:
+    *   **Must-Haves (Ship this Week)**:
+        *   Show real-time events on a **map** and a **feed**.
+        *   Let users **filter by time and event type**.
+        *   Pull events from scrapers and show them within seconds.
+        *   Include **source attribution** and **basic trust info**.
+    *   **Nice-to-Haves (If time allows)**:
+        *   Event detail modal with source links and bias score (basic).
+        *   Timeline scrubber with playback.
+        *   Mobile-optimized layout.
+        *   Basic SEO metadata.
+    *   **Out of Scope for MVP**:
+        *   Multi-language support.
+        *   Social sharing.
+        *   User accounts or alerts.
+        *   Advanced credibility scoring.
+
+*   **Team Roles for 1-Week Sprint**:
+    | Role                       | Owner     | Focus                                 |
+    | -------------------------- | --------- | ------------------------------------- |
+    | Tech Lead                  | You (?)   | Coordinate, unblock, review PRs       |
+    | Scrapers (2 devs)          | Dev A & B | Build and stabilize core ingestion    |
+    | Backend/API (1 dev)        | Dev C     | Set up Express + Elastic integration  |
+    | Frontend (2 devs)          | Dev D & E | Build Feed, Map, Filters, Event Modal |
+    | Design/UX (1 designer/dev) | Dev F     | Wireframes, UI polish, map styling    |
+
+*   **Milestones (1-Week Sprint)**:
+    *   **Day 1**: Define schemas, Setup Elastic & Next.js scaffolding, Build feed UI + dummy data.
+    *   **Day 2–3**: Scraper: get 3 sources live, Mapbox base map + markers, API: `/api/events`.
+    *   **Day 4**: Integrate map + feed, Add filters (event type, time), Clean frontend design + layout.
+    *   **Day 5–6**: Polish UX, fix bugs, Add modals/tooltips, SEO basics (titles, metadata), Uptime and logging.
+    *   **Day 7**: Test full flow, Internal launch + feedback, Public release: post on Reddit, Twitter, Telegram, WhatsApp, LinkedIn.
+
+# Logical Dependency Chain (MVP Focus)
+1.  **Foundation**: Schemas, Elasticsearch setup, Next.js scaffolding.
+2.  **Data Ingestion**: Scrapers live and populating Elasticsearch.
+3.  **API Layer**: Backend API serves data from Elasticsearch.
+4.  **Frontend Display**: Feed and Map components render data from API.
+5.  **Interactivity**: Filters and event detail modals functional.
+
+# Risks and Mitigations (MVP Focus)
+*   **Technical Challenges**:
+    *   *Risk*: Scraper instability for selected news/Twitter sources.
+    *   *Mitigation*: Focus on reliable sources, have backup manual entry if a scraper fails critically before launch.
+    *   *Risk*: Real-time data handling performance with simple polling/SWR.
+    *   *Mitigation*: Optimize API queries, keep data payloads small. WebSockets are a nice-to-have.
+*   **Scope Creep within 1 Week**:
+    *   *Risk*: Trying to fit in too many "Nice-to-Haves".
+    *   *Mitigation*: Strict adherence to "Must-Haves". Tech Lead to gatekeep scope.
+*   **Data Quality (MVP Heuristics)**:
+    *   *Risk*: Keyword-based classification or simple geolocation is inaccurate.
+    *   *Mitigation*: Accept MVP limitations. Focus on speed and basic usability. Transparency about data processing simplicity.
+
+# Appendix
+*   **Key Technologies (MVP)**:
+    *   Next.js
+    *   Mapbox GL JS
+    *   Node.js (Express.js)
+    *   Puppeteer
+    *   Elasticsearch
+*   **Future Enhancements (Post-MVP - examples from original detailed PRD)**:
+    *   Advanced NLP (bias detection, nuanced classification).
+    *   User accounts, alerts, saved searches.
+    *   Expanded data sources and verification algorithms.
+    *   Dedicated mobile applications.
+    *   Multi-language support.
+    *   Admin dashboard for content management.
+*   **Success Metrics (MVP)**:
+    *   MVP Launch in 7 Days.
+    *   Working map + feed integration.
+    *   > 500 unique visitors on launch day (target from `prd.md`).
+    *   < 1s API response time.
+    *   Scraper stability: < 5% error rate (target from `prd.md`).
+
+---
+**Summary (from prd.md)**
+Unfiltered is a focused, high-urgency product built to give real-time clarity to people following the Indo-Pakistan conflict. The MVP will focus on **doing a few things extremely well**: ingest live data, classify it quickly, and show it clearly.
+
+We're not trying to be a full OSINT platform this week. We're trying to become the **most trusted, usable source for people trying to understand what's happening — right now.**
+
+Let's go build it. 
