@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+
+    --primary: 24 9.8% 10%;
+    --primary-foreground: 60 9.1% 97.8%;
+
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 20 5.9% 90%;
+    --ring: 20 14.3% 4.1%;
+
+    --radius: 0.5rem;
+
+    --timeline-bg: 215 25% 15%;
+    --timeline-highlight: 180 65% 50%;
+
+    --amber-50: 48 100% 96.1%;
+    --amber-100: 48 96.5% 88.8%;
+    --amber-200: 48 96.6% 76.7%;
+    --amber-800: 43 96.4% 56.3%;
+  }
+
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+
+    --card: 20 14.3% 4.1%;
+    --card-foreground: 60 9.1% 97.8%;
+
+    --popover: 20 14.3% 4.1%;
+    --popover-foreground: 60 9.1% 97.8%;
+
+    --primary: 60 9.1% 97.8%;
+    --primary-foreground: 24 9.8% 10%;
+
+    --secondary: 12 6.5% 15.1%;
+    --secondary-foreground: 60 9.1% 97.8%;
+
+    --muted: 223 47% 11%;
+    --muted-foreground: 215.4 16.3% 56.9%;
+
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 60 9.1% 97.8%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 60 9.1% 97.8%;
+
+    --border: 216 34% 17%;
+    --input: 12 6.5% 15.1%;
+    --ring: 24 5.7% 82.9%;
+  }
+
+  body {
+    @apply bg-amber-50 text-gray-900;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .news-category {
+    @apply text-xs uppercase tracking-widest font-bold text-amber-800;
+  }
+
+  .news-date {
+    @apply text-xs text-gray-500 italic;
+  }
+
+  .news-title {
+    @apply font-serif font-bold text-gray-900 leading-tight;
+  }
+
+  .news-excerpt {
+    @apply text-sm text-gray-600;
+  }
+
+  .category-item {
+    @apply py-1 px-2 hover:bg-gray-100 transition-colors cursor-pointer;
+  }
+
+  .category-item.active {
+    @apply bg-amber-50;
+  }
+
+  /* Classic newspaper styles */
+  .newspaper-column {
+    column-count: 1;
+  }
+
+  @media (min-width: 768px) {
+    .newspaper-column {
+      column-count: 2;
+      column-gap: 2rem;
+    }
+  }
+}

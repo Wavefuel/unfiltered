@@ -1,0 +1,17 @@
+export const categories = [
+  "ALL",
+  "LATEST NEWS",
+  "OPINION",
+  "SPORTS",
+  "LIFE STYLE",
+  "SHOWBIZ",
+  "HEALTH",
+  "SCIENCE",
+  "TECHNOLOGY",
+  "TALK SHOW",
+  "EDUCATION",
+  "JOB NEWS",
+  "BUSINESS",
+  "RELIGION",
+  "OTHERS",
+]
