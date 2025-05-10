@@ -54,9 +54,9 @@ const mapboxAccessToken = "pk.eyJ1Ijoid2F2ZWZ1ZWwyMDIxIiwiYSI6ImNtYWkwZ3YwcjAyOG
 
 const NewsMap = () => {
 	return (
-		<main>
+		<div className="w-full h-full">
 			<CustomMap markers={markers} mapboxAccessToken={mapboxAccessToken || ""} />
-		</main>
+		</div>
 	);
 };
 

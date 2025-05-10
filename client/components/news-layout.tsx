@@ -38,34 +38,11 @@ export default function NewsLayout() {
 	}, [filteredNews, selectedNews]);
 
 	return (
-		<div className="flex flex-col md:flex-row h-screen max-h-screen overflow-hidden max-w-8xl mx-auto">
-			<div className="w-2/6 border-r border-gray-900/75 overflow-hidden flex flex-col h-full ">
-				<ScrollArea className="h-full">
-					<div className="">
-						<NewsList news={filteredNews} selectedNews={selectedNews} setSelectedNews={setSelectedNews} />
-					</div>
-				</ScrollArea>
+		<div className="flex flex-col md:flex-row h-screen max-h-screen overflow-hidden w-full mx-auto">
+			<div className="w-3/6 border-r-2 border-gray-900/75 overflow-hidden flex flex-col h-full ">
+				<NewsList news={filteredNews} selectedNews={selectedNews} setSelectedNews={setSelectedNews} />
 			</div>
-
-			<div className="w-full md:w-4/5 border-r border-gray-900/75 h-full overflow-hidden">
-				{/* News outline grid */}
-				<div className="grid grid-cols-3 border-b border-gray-900/75">
-					<div className="border-r border-gray-900/75 p-4">
-						<div className="text-sm font-semibold mb-2">Culture</div>
-						<h3 className="font-serif text-lg font-bold">Incongruous Jeepers Jellyfish One Far Well Known</h3>
-					</div>
-
-					<div className="border-r border-gray-900/75 p-4">
-						<div className="text-sm font-semibold mb-2">Uncategorized</div>
-						<h3 className="font-serif text-lg font-bold">This Nudged Jeepers Ded Sesulky Oite Ten Around Style3</h3>
-					</div>
-
-					<div className="border-r border-gray-900/75 p-4">
-						<div className="text-sm font-semibold mb-2">Culture . Europe</div>
-						<h3 className="font-serif text-lg font-bold">Timmediately Quail Was Inverse Much So Remade Dimly Salmon</h3>
-					</div>
-				</div>
-
+			<div className="w-full p-5 border-r border-l-0 border-gray-900/75 h-full overflow-hidden">
 				<NewsMap />
 			</div>
 		</div>

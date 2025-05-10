@@ -1,20 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, CircleUser, Menu, Search } from "lucide-react";
 import Link from "next/link";
 
 export default function Header() {
 	const menuItems = [
-		{ name: "HOME", path: "/", active: true },
-		{ name: "BLOG", path: "/blog" },
-		{ name: "CATEGORY LAYOUTS", path: "/category-layouts", hasDropdown: true },
-		{ name: "TAGS LAYOUT", path: "/tags-layout", hasDropdown: true },
-		{ name: "POST STYLES", path: "/post-styles", hasDropdown: true },
-		{ name: "MODULE", path: "/module" },
-		{ name: "CPT", path: "/cpt", hasDropdown: true },
-		{ name: "AUTHOR", path: "/author" },
-		{ name: "404", path: "/404" },
+		{ name: "INDIA", path: "/", active: true },
+		{ name: "UKRAINE", path: "/blog" },
+		{ name: "PALESTINE", path: "/category-layouts" },
+		{ name: "TAIWAN", path: "/tags-layout" },
+		{ name: "NORTH KOREA", path: "/tags-layout" },
 	];
 
 	const latestNews = [
@@ -61,7 +57,7 @@ export default function Header() {
 	return (
 		<header>
 			{/* Top ticker */}
-			<div className="bg-amber-50 text-black border-b-2 border-gray-900/75 flex items-center">
+			{/* <div className="text-black border-b-2 border-gray-900/75 flex items-center">
 				<div className="bg-black text-white px-3 py-2 flex items-center">
 					<svg className="w-4 h-4 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
 						<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" strokeLinecap="round" strokeLinejoin="round" />
@@ -77,29 +73,63 @@ export default function Header() {
 						))}
 					</div>
 				</div>
-			</div>
+			</div> */}
 
 			{/* Logo and social media section */}
-			<div className="flex justify-center w-full items-center py-4 px-4 md:px-20">
+			<div className="flex justify-between h-28 w-full items-center py-4 px-36">
+				<div className="flex items-center">
+					<div className="relative">
+						<button className="flex items-center text-sm font-bold header-buttons">
+							ENGLISH <ChevronDown className="ml-1 h-3 w-3" />
+						</button>
+					</div>
+				</div>
 				<div className="text-center">
-					<h1 className="text-5xl font-bold font-Playfair">THE UNFILTERED</h1>
+					<h1 className="text-6xl font-normal header-title text-gray-800">Unfiltered</h1>
+				</div>
+				<div className="flex items-center header-buttons">
+					<Link href="#" className="text-sm font-bold hover:underline underline-offset-auto">
+						LOGIN
+					</Link>
+					<span className="mx-2">|</span>
+					<Link href="#" className="text-sm font-bold hover:underline underline-offset-auto">
+						SIGN IN
+					</Link>
+				</div>
+			</div>
+
+			{/* Filter Section */}
+			<div className="flex justify-between items-center border-t-2 border-b border-gray-900/75 h-10">
+				<div className="flex items-center border-r-2 justify-center border-gray-900/75 h-full w-14">
+					<i className="text-gray-800 fa-solid fa-circle-user text-[24px]" />
+				</div>
+
+				<div className="flex items-center h-full">
+					<button className="flex justify-center items-center text-gray-800 border-l-2 border-gray-900/75 h-full w-14">
+						<Search className="text-[20px]" />
+					</button>
+					<button className="flex justify-center items-center text-gray-800 border-l-2 border-gray-900/75 h-full w-14">
+						<Menu className="text-[20px]" />
+					</button>
 				</div>
 			</div>
 
 			{/* Main navigation */}
-			<nav className="border-t border-b border-gray-900/75">
+			<nav className="border-t border-b-2 border-gray-900/75">
 				<div className="px-4 md:px-20">
-					<ul className="flex flex-wrap items-center justify-center">
+					<ul className="flex flex-wrap items-center justify-center gap-4">
 						{menuItems.map((item, index) => (
-							<li key={index} className="relative">
-								<Link
-									href={"#"}
-									className={`px-4 py-4 inline-flex items-center text-sm font-medium ${item.active ? "text-red-600" : ""}`}
-								>
-									{item.name}
-									{item.hasDropdown && <ChevronDown className="ml-1 h-3 w-3" />}
-								</Link>
-							</li>
+							<>
+								<li key={index} className="flex items-center relative header-text">
+									<Link
+										href={"#"}
+										className={`px-4 py-4 inline-flex items-center text-lg font-extrabold ${item.active ? "text-[#e47659]" : ""}`}
+									>
+										{item.name}
+									</Link>
+								</li>
+								{index < menuItems.length - 1 && <span className="text-lg font-bold pb-[6px] text-gray-600">•</span>}
+							</>
 						))}
 					</ul>
 				</div>

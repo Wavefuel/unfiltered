@@ -11,20 +11,20 @@ interface NewsListProps {
 
 export default function NewsList({ news, selectedNews, setSelectedNews }: NewsListProps) {
 	return (
-		<div className="border-t border-border font-Playfair">
+		<div className="border-t-0 overflow-y-auto">
 			{news.map((item) => (
 				<div
 					key={item.id}
-					className={`p-4 border-b border-gray-900/75 cursor-pointer transition-colors`}
+					className={`p-4 border-r-0 border-b border-gray-900/75 cursor-pointer transition-colors group`}
 					onClick={() => setSelectedNews(item)}
 				>
 					<div className="flex gap-4">
-						<div className="w-28 h-28 relative flex-shrink-0">
-							<Image src={item.image || "/placeholder.svg"} alt={item.title} fill className="object-cover" />
+						<div className="w-44 relative flex-shrink-0">
+							<Image src={item.image || "/placeholder.svg"} alt={item.title} fill className="object-cover grayscale" />
 						</div>
 						<div>
-							<h3 className="font-serif text-lg font-bold">{item.title}</h3>
-							<p className="news-excerpt line-clamp-2 mt-1">{item.excerpt}</p>
+							<h3 className="header-text text-lg font-bold group-hover:text-[#e47659] transition-colors">{item.title}</h3>
+							<p className="excerpt-text mt-1 text-wrap text-xs">{item.excerpt}</p>
 						</div>
 					</div>
 				</div>

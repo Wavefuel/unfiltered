@@ -76,11 +76,17 @@
   }
 
   body {
-    @apply bg-amber-50 text-gray-900;
+    @apply text-gray-900;
+    background-color: #eae4dd;
     font-family: 'Roboto', sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Playfair Display', serif;
   }
 }
@@ -121,4 +127,40 @@
       column-gap: 2rem;
     }
   }
+}
+
+.header-title {
+  font-family: "leather", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.header-buttons {
+  font-family: "chandler-42-regular", sans-serif;
+  font-weight: 700;
+  font-style: bold;
+  color: #666664;
+}
+
+.header-text {
+  font-family: "lft-etica-mono", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  color: #373735;
+}
+
+.excerpt-text {
+  font-family: "lft-etica-mono", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  color: #373735;
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-track {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  background: transparent !important;
 }

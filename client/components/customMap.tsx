@@ -108,7 +108,7 @@ const CustomMap: React.FC<CustomMapProps> = ({
 		});
 	};
 
-	return <div ref={mapContainer} style={{ width: "100%", height: "100vh" }} />;
+	return <div ref={mapContainer} style={{ width: "100%", height: "100%" }} />;
 };
 
 export default CustomMap;

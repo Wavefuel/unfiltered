@@ -21,6 +21,8 @@ const config: Config = {
         sans: ["Roboto", "ui-sans-serif", "system-ui"],
         serif: ["Playfair Display", "ui-serif", "Georgia"],
         Playfair: ["Playfair Display", "ui-serif", "Georgia"],
+        leather: ["leather", "ui-serif", "Georgia"],
+        chandler: ["chandler-42-regular", "ui-sans-serif", "system-ui"],
       },
       colors: {
         border: "hsl(var(--border))",

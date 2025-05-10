@@ -1,0 +1,13 @@
+{
+    "watch": [
+        ".",
+        "src"
+    ],
+    "ext": "ts,tsx,json",
+    "ignore": [
+        "logs/**/*",
+        "src/**/*.spec.ts",
+        "src/core/manifest/*.json"
+    ],
+    "exec": "ts-node -r tsconfig-paths/register index.ts"
+}
