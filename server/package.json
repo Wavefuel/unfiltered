@@ -1,0 +1,16 @@
+{
+	"scripts": {
+		"start": "ts-node src/index.ts",
+		"build": "tsc",
+		"dev": "ts-node-dev src/index.ts"
+	},
+	"dependencies": {
+		"express": "^5.1.0"
+	},
+	"devDependencies": {
+		"@types/express": "^5.0.1",
+		"@types/node": "^22.15.17",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.8.3"
+	}
+}
