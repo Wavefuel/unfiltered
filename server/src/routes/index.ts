@@ -1,8 +1,6 @@
-import { Router } from "express";
-const router = Router();
+import { FastifyInstance } from 'fastify';
 
-router.get("/", (req, res) => {
-	res.json({ message: "Hello from routes!" });
-});
-
-export default router;
+export async function routes(fastify: FastifyInstance) {
+    // Register all route groups
+    // await fastify.register(xyzRoutes, { prefix: '/api/v1/xyz' });
+}
