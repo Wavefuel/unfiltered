@@ -29,6 +29,7 @@
 		"dev": "dotenvx run -f .env -- npx nodemon --config nodemon.json",
 		"create-plugin": "tsx ./cli/create-plugin.ts"
 	},
+	"main": "dist/index.js",
 	"author": "Wavefuel",
 	"license": "ISC",
 	"dependencies": {
@@ -138,10 +139,16 @@
 		"rollup-plugin-obfuscator": "^1.1.0",
 		"rollup-pluginutils": "^2.8.2",
 		"ts-jest": "^29.2.5",
-		"ts-node": "^10.9.2",
-		"tsc-alias": "^1.8.10",
-		"tsconfig-paths": "^4.2.0",
-		"tsx": "^4.19.2",
-		"typescript": "^5.4.5"
+		"axios": "^1.6.0",
+		"cors": "^2.8.5",
+		"dotenv": "^16.5.0",
+		"express": "^5.1.0",
+		"natural": "^8.0.1",
+		"puppeteer": "^24.8.2",
+		"puppeteer-extra": "^3.3.6",
+		"puppeteer-extra-plugin-stealth": "^2.11.2",
+		"random-useragent": "^0.5.0",
+		"stopword": "^3.1.4",
+		"xml2js": "^0.6.2"
 	}
 }
