@@ -3,12 +3,9 @@ import NewsLayout from "@/components/news-layout";
 import MapboxInstructions from "@/components/news-map-instructions";
 
 export default function Home() {
-  return (
-    <main className="max-h-[730px] flex flex-col">
-      {/* <div className="container mx-auto px-4 py-2">
-        <MapboxInstructions />
-      </div> */}
-      <NewsLayout />
-    </main>
-  );
+	return (
+		<main className="flex h-[calc(100vh-172px)] flex-col">
+			<NewsLayout />
+		</main>
+	);
 }
