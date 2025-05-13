@@ -74,6 +74,7 @@ export default function RootLayout({
 				/>
 			</head>
 			<body className={`font-serif`}>
+				<div className="grain"></div>
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
 					<Header />
 					{children}
